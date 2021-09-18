@@ -17,7 +17,7 @@ words = result.split(' ')
 angle1 = parseInt( words[0])
 angle2 = parseInt( words[1])
 globalAngle = parseInt( words[2])
-timeChange = parseInt( words[4])
+timeChange = 100 - parseInt( words[4])
 
 if(words[3]=="x")
 {
@@ -32,15 +32,19 @@ if(words[3]=="z")
     Axis = 2
 }
 
-const limiter = 360*timeChange+1
-angle1 /=timeChange
-angle2 /=timeChange
-globalAngle /=timeChange
-console.log(Axis)
+const limiter = 360+1
+
+
+
+
+
+
 
 globalAngle = globalAngle*Math.PI/180;
 angle1 = angle1*Math.PI/180;
 angle2 = angle2*Math.PI/180;
+
+
 
 
 let center = new Verticle(canvas.width/2, canvas.height/2, defaultZ)
@@ -54,6 +58,13 @@ firstStickCoords.push(new Verticle(center.X, center.Y-len, defaultZ))
 secondStickCoords.push(new Verticle(center.X, center.Y, defaultZ))
 secondStickCoords.push(new Verticle(center.X, center.Y-len, defaultZ))
 
+function pausecomp(millis)
+{
+    var date = new Date();
+    var curDate = null;
+    do { curDate = new Date(); }
+    while(curDate-date < millis);
+}
 
 window.requestAnimationFrame(function loop() {
 
@@ -119,6 +130,6 @@ window.requestAnimationFrame(function loop() {
         context.lineTo(drawingSequence[i].X, drawingSequence[i].Y);
     }
     context.stroke()
-
+    pausecomp(timeChange)
     window.requestAnimationFrame(loop)
 })
