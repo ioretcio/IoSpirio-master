@@ -1,4 +1,7 @@
-const limiter = 361
+timeChange = 2
+
+
+
 let iterations = 0
 let len = 200
 let defaultZ = 0
@@ -8,13 +11,13 @@ let Axis = 1
 let globalAngle = 3
 
 
-result = prompt("Введіть циферки", "1 1 0 x");
+result = prompt("Введіть циферки", "1 1 0 x 10");
 
 words = result.split(' ')
 angle1 = parseInt( words[0])
 angle2 = parseInt( words[1])
 globalAngle = parseInt( words[2])
-
+timeChange = parseInt( words[4])
 
 if(words[3]=="x")
 {
@@ -29,10 +32,10 @@ if(words[3]=="z")
     Axis = 2
 }
 
-
-console.log(angle1)
-console.log(angle2)
-console.log(globalAngle)
+const limiter = 360*timeChange+1
+angle1 /=timeChange
+angle2 /=timeChange
+globalAngle /=timeChange
 console.log(Axis)
 
 globalAngle = globalAngle*Math.PI/180;
